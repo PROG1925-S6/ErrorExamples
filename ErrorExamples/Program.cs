@@ -17,7 +17,8 @@ namespace ErrorExamples
     {
         static void Main(string[] args)
         {
-            TryCatchExamples();
+            //TryCatchExamples();
+            ValidatingInput();
         }
 
         public static void TryCatchExamples()
@@ -29,7 +30,7 @@ namespace ErrorExamples
                 Console.Write("Enter a number value (1-100): ");
                 num1 = Convert.ToInt16(Console.ReadLine());
 
-                if(num1 < 1 || num1 > 100)
+                if (num1 < 1 || num1 > 100)
                 {
                     throw new ArgumentOutOfRangeException();
                 }
@@ -41,9 +42,9 @@ namespace ErrorExamples
 
                 Console.WriteLine($"{num1} / {num2} = {answer}");
             }
-            catch (FormatException) 
+            catch (FormatException)
             {
-               // Console.WriteLine(ex.Message);
+                // Console.WriteLine(ex.Message);
                 Console.Write("That is not a number!!! ");
             }
             catch (OverflowException)
@@ -51,7 +52,7 @@ namespace ErrorExamples
                 //Console.WriteLine(ex.Message);
                 Console.Write("Hey There. That number is too big, (or too small)");
             }
-            catch(DivideByZeroException)
+            catch (DivideByZeroException)
             {
                 Console.Write("You can't divide by 0");
             }
@@ -66,6 +67,38 @@ namespace ErrorExamples
 
 
             Console.ReadKey();
+        }
+
+        public static void ValidatingInput()
+        {
+            int num1, num2;
+
+            num1 = GetInt("Please enter the first number");
+            num2 = GetInt("Please enter your age");
+        
+            Console.ReadKey();
+        }
+
+        public static int GetInt(string userPrompt)
+        {
+            int num1 = 0;
+            bool inputOk = false;
+
+            do
+            {
+                try
+                {
+                    Console.WriteLine(userPrompt);
+                    num1 = Convert.ToInt16(Console.ReadLine());
+                    inputOk = true;
+                }
+                catch
+                {
+                    Console.WriteLine("ERROR");
+                }
+            } while (inputOk == false);
+
+            return num1;
         }
     }
 }
